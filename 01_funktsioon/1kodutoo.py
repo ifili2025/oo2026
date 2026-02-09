@@ -22,7 +22,7 @@ def meeskonna_punktid(team):
                 away_point += 1            
     return game_count,home_point, away_point
 
-team = str(input('Sisesta meeskonna nimi, annan sulle teada selle meeskonna punkti praegusel hooajal summa: '))
+team = str(input('Sisesta meeskonna nimi, siis annan sulle selle meeskonna kogupunktid praegusel hooajal: '))
 game_count, home, away = meeskonna_punktid(team)
 print(team, "sellel hooajal omab", home + away, "punktid, nendest tuli", home, "punkti kodumängudest ja", away, "punkti välimängudest ja kokku mängiti", game_count, "mängu. Max võimalik punktide arv võiks olla", game_count * 3)
 

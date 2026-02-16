@@ -19,9 +19,17 @@ class BankAccount:
     def showHistory(self):
         return self.transactions
 
-account = BankAccount("Igor", 1000)
-print(account.deposit(500))
-print(account.withdraw(200))
-print(account.withdraw(2000))
-print(account.showBalance())
-print(account.showHistory())
+account1 = BankAccount("Igor", 1000)
+acoount2 = BankAccount("Muhamet", 2000)
+
+
+print(account1.deposit(500))
+print(account1.withdraw(200))
+print(account1.withdraw(2000))
+print(account1.showBalance())
+print(account1.showHistory())
+
+print(acoount2.deposit(1000))
+print(acoount2.withdraw(500))
+print(acoount2.showBalance())
+print(acoount2.showHistory())

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="et">
+    <head>
+        <meta charset="utf-8">
+        <script>
+            class SnakePart {
+                constructor(x, y, ctx, koef) {
+                    this.x = x;
+                    this.y = y;
+                    this.ctx = ctx;
+                    this.koef = koef;
+                }
+                draw() {
+                    this.ctx.fillStyle = 'lightgreen';
+                    this.ctx.fillRect(this.x * this.koef, this.y * this.koef, this.koef, this.koef);
+                }
+            }
+            class Snake {
+                constructor(ctx, koef) {
+                    this.ctx = ctx;
+                    this.koef = koef;
+                    this.osad = [new SnakePart(5, 5, ctx, koef), new SnakePart(4, 5, ctx, koef)];
+                }
+                liigu(uueX, uueY, food) {
+                    let head = new SnakePart(uueX, uueY, this.ctx, this.koef);
+                    this.osad.unshift(head);
+                    if (uueX === food.x && uueY === food.y) {
+                        return true;
+                    } else {
+                        this.osad.pop();
+                    }
+                }
+                draw() {
+                    for (let osa of this.osad) {
+                        osa.draw();
+                    }
+                }
+            }
+            class Game {
+                constructor() {
+                    this.canvas = document.getElementById('tahvel');
+                    this.ctx = this.canvas.getContext('2d');
+                    this.koef = 10;
+                    this.punktid = 0;
+                    this.food = { x: 10, y: 10 };
+                    this.snake = new Snake(this.ctx, this.koef);
+                    this.drawGame();
+                }
+                drawFood() {
+                    this.ctx.fillStyle = 'red';
+                    this.ctx.fillRect(this.food.x * this.koef, this.food.y * this.koef, this.koef, this.koef);
+                }
+                drawGame() {
+                    this.ctx.fillStyle = 'black';
+                    this.ctx.fillRect(0, 0, 200, 200);
+                    
+                    this.drawFood();
+                    this.snake.draw();
+                    document.getElementById('punktid').innerText = this.punktid;
+                }
+                samm(dx, dy) {
+                    let uueX = this.snake.osad[0].x + dx;
+                    let uueY = this.snake.osad[0].y + dy;
+                    if (this.snake.liigu(uueX, uueY, this.food)) {
+                        this.punktid++;
+                        this.food.x = Math.floor(Math.random() * 20);
+                        this.food.y = Math.floor(Math.random() * 20);
+                    }
+                    this.drawGame();
+                }
+            }
+            let game;
+            function algus(){
+                game = new Game();
+            }
+            function vasakule() { game.samm(-1, 0); }
+            function paremale() { game.samm(1, 0); }
+            function ulese()    { game.samm(0, -1); }
+            function alla()     { game.samm(0, 1); }
+        </script>
+    </head>
+    <body onload="algus()">
+        <p id='punktid'>0</p><br>
+        <canvas id="tahvel" width="200" height="200"></canvas><br>
+        <button onclick='vasakule()'>←</button>
+        <button onclick='ulese()'>↑</button>
+        <button onclick='alla()'>↓</button>
+        <button onclick='paremale()'>→</button>
+    </body>

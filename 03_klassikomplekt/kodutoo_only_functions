@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="et">
+    <head>
+        <meta charset="utf-8">
+        <script>
+            let canvas;
+            let ctx;
+            let snake = [{x:1, y:1}, {x:0, y:1}]
+            let koef = 10;
+            let food = {x: 10, y:10}
+            let punktid = 0
+
+            function algus(){
+                canvas = document.getElementById('tahvel');
+                ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'black';
+                ctx.fillRect(0,0,200,200);
+                drawSnake()
+                drawFood()
+            }
+            function drawSnake(){
+                ctx.fillStyle = 'lightgreen'
+                for(let osa of snake) {
+                    ctx.fillRect(osa.x * koef, osa.y * koef, koef, koef);
+                }    
+            }
+            function liigu(uueX, uueY){
+                let head = {x: uueX, y:uueY};
+                snake.unshift(head)
+                if (uueX === food.x && uueY === food.y) {
+                    punktid ++
+                    document.getElementById('punktid').innerText = punktid;
+                    food.x = Math.floor(Math.random() * 20)
+                    food.y = Math.floor(Math.random() * 20)
+                } else{
+                    snake.pop()
+                    }
+                algus();
+                }
+            function vasakule(){
+                liigu(snake[0].x -1, snake[0].y)
+            }
+            function paremale(){
+                liigu(snake[0].x + 1, snake[0].y)
+            }
+            function ulese(){
+                liigu(snake[0].x, snake[0].y - 1)
+            }
+            function alla(){
+                liigu(snake[0].x, snake[0].y + 1)
+            }
+            function drawFood(){
+                ctx.fillStyle = 'red'
+                ctx.fillRect(food.x*koef,food.y*koef,koef,koef)
+            }
+
+        </script>
+    </head>
+    <body onload="algus()">
+        <p id='punktid'>0</p><br>
+        <canvas id="tahvel" width="200" height="200"></canvas><br>
+        <button onclick='vasakule()'>←</button>
+        <button onclick='ulese()'>↑</button>
+        <button onclick='alla()'>↓</button>
+        <button onclick='paremale()'>→</button>
+    </body>

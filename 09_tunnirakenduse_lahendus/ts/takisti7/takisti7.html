@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Takisti</title>
+    <script src="takisti7.js"></script>
+    <script>
+        let r1, r2, sc1, r3, r4, sc2, r5, r6, sc3;
+        function startPage(){
+           r1=new Resistor("r1",110); 
+           r2=new Resistor("r2",220);
+           sc1=new SeriesCircuit(canvas1.getContext("2d"), 10, 50);
+           sc1.push(r1);
+           sc1.push(r2);
+           r3=new Resistor("r3",330);
+           r4=new Resistor("r4",470);
+           sc2=new SeriesCircuit(canvas1.getContext("2d"), 10, 150);
+           sc2.push(r3);
+           sc2.push(r4);
+           r5=new Resistor("r5",100);
+           r6=new Resistor("r6",150);
+           sc3=new SeriesCircuit(canvas1.getContext("2d"), 10, 250);
+           sc3.push(r5);
+           sc3.push(r6);
+        }
+    </script>
+  </head>
+  <body onload="startPage()">
+      <canvas id="canvas1" width="400" height="300"></canvas>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+Kartuli salat
+kartul 100
+hapukoor 30
+vorst 60

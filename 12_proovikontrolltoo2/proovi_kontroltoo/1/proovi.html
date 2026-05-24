@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hulknurk</title>
+    <script src="proovi.js"></script>
+    <script>
+        let c;
+        function startPage(){
+           c=new Hulknurk(300,300,50,3); 
+           c.draw(canvas1.getContext("2d"));
+           document.getElementById("pindala").innerText = "Pindala: " + c.area;
+        }
+    </script>
+  </head>
+  <body onload="startPage()">
+    <canvas id="canvas1" width="600" height="600"></canvas>
+    <p> kas toimib</p>
+    <p id="pindala">Pindala: 0</p> 
+    <input type="range" id="tipude_arv" min="3" max="100" step="1" onchange="c.tipude_arv=tipude_arv.valueAsNumber; c.draw(canvas1.getContext('2d')); document.getElementById('pindala').innerText = 'Pindala: ' + c.area;" />
+      <label for="tipude_arv">tipude arv</label>
+      <br>
+  </body>
+</html>
